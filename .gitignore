@@ -1,5 +1,7 @@
 # clangd setting
-./compile_commands.json
-./.clangd
+# ./compile_commands.json
+# ./.clangd
 # packet capture for http communication reference
-./http.pcapng
+http.pcapng
+# personal TODO list
+TODO.md

@@ -1,0 +1,17 @@
+[
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-g",
+      "-Wall",
+      "-I./src",
+      "-c",
+      "-o",
+      "obj/uri.o",
+      "src/uri.c"
+    ],
+    "directory": "/home/rogawa/work/develop/wdove",
+    "file": "/home/rogawa/work/develop/wdove/src/uri.c",
+    "output": "/home/rogawa/work/develop/wdove/obj/uri.o"
+  }
+]

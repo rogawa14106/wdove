@@ -1,0 +1,35 @@
+If:
+    PathMatch: .*
+
+CompileFlags:
+    Add:
+        - -Wall
+        - -xc
+        # - -std=c17
+        # - --target=x86_64-linux-gnu
+        # - --include-directory=/lib/
+        # - --include-directory=/lib/x86_64-linux-gnu/
+        # - --include-directory=/usr/lib/
+        # - --include-directory=/usr/lib/gcc/x86_64-linux-gnu/
+        # - --include-directory=/usr/lib/gcc/x86_64-linux-gnu/13/
+        # - --include-directory=/usr/lib/x86_64-linux-gnu/
+        # - --include-directory=/usr/libexec/gcc/x86_64-linux-gnu/
+        # - --include-directory=/usr/libexec/gcc/x86_64-linux-gnu/13/
+        # - --include-directory=/usr/include/x86_64-linux-gnu/
+        - "-I./src" 
+        # - --include-directory=/usr/include/x86_64-linux-gnu/
+    Compiler: gcc
+InlayHints:
+    BlockEnd: Yes
+    Designators: Yes
+    Enabled: Yes
+    ParameterNames: Yes
+    DeducedTypes: Yes
+    TypeNameLimit: 24
+Completion:
+    AllScopes: Yes
+Index:
+    StandardLibrary: Yes
+
+# try
+# compdb -p build/ list > compile_commands.json

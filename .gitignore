@@ -4,7 +4,7 @@ http.pcapng
 TODO.md
 
 # clangd setting
-# ./compile_commands.json
+compile_commands.json
 # ./.clangd
 
 # build

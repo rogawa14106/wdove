@@ -74,15 +74,16 @@ wd_http_hdr_t *create_http_hdr_get(wd_uri_t *uri) {
   wd_http_hdr_t *http_hdr;
   http_hdr = malloc(sizeof(wd_http_hdr_t));
   http_hdr->method = method_to_name(HTTP_GET);
-  http_hdr->path = uri->path;
+  http_hdr->uri.path = uri->path;
+  http_hdr->uri.query = uri->query;
   http_hdr->version = version_to_name(HTTP_VERSION_1_1);
 
-  // http_hdr->fields = calloc(3, sizeof(wd_http_hdr_field_t));
-  http_hdr->fields_len = 3;
   // TODO
   // これはデフォルトの設定とするとして、コマンドライン引数からヘッダをシテイできるようにもしたい
   // かなりハードコードなのもどうにかしたい。
-  http_hdr->fields = calloc(http_hdr->fields_len, 8);
+  // メモリ確保がこれで大丈夫なのか心配
+  http_hdr->fields_len = 3;
+  http_hdr->fields = calloc(http_hdr->fields_len, sizeof(char *));
   http_hdr->fields[0].name = "Host"; //"Host: "
   http_hdr->fields[0].val = uri->host;
   http_hdr->fields[1].name = "User-Agent";
@@ -94,11 +95,10 @@ wd_http_hdr_t *create_http_hdr_get(wd_uri_t *uri) {
 
 // create request
 u_char *create_http_req(u_char *http_req, wd_http_hdr_t *hdr, u_char *data) {
-  // u_char *http_req;
-
+  // create http header according to standard format
   // create first line
-  sprintf((char *)http_req, "%s %s %s\r\n", hdr->method, hdr->path,
-          hdr->version);
+  sprintf((char *)http_req, "%s %s%s %s\r\n", hdr->method, hdr->uri.path,
+          hdr->uri.query, hdr->version);
 
   // create fields
   for (int i = 0; i < hdr->fields_len; i++) {

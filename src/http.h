@@ -87,10 +87,16 @@ typedef struct {
   char *val;
 } wd_http_hdr_field_t;
 
+typedef struct {
+  char *path;
+  char *query;
+} wd_http_hdr_uri_t;
+
 // http header
 typedef struct {
-  char *method;                // GET
-  char *path;                  // /top.html
+  char *method; // GET
+                // char *path;                  // /top.html
+  wd_http_hdr_uri_t uri;
   char *version;               // HTTP/1.1
   int fields_len;              // HOST: xxx.com
   wd_http_hdr_field_t *fields; // HOST: xxx.com

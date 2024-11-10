@@ -142,3 +142,4 @@ char *method_to_name(wd_http_method_t method);
 char *version_to_name(wd_http_version_t method);
 int http_connect(struct in_addr, in_port_t port);
 #endif //_HTTPC_HTTP_H_
+// vim:ft=c :

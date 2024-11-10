@@ -44,3 +44,4 @@ int re_match(char **matches, char *str, char *regex);
 char *str_sub(char *str, int start, int offset);
 
 #endif /* ifndef _URI_H */
+// vim:ft=c :

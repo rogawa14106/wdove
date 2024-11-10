@@ -6,3 +6,5 @@
 struct in_addr resolve_host(char *hostname);
 
 #endif // _DNS_H
+
+// vim:ft=c :

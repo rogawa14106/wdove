@@ -37,6 +37,7 @@ test:
 	# 異常系
 	# ./build/$(PROG) "abehiroshi.la.coocan.jp"
 	# ./build/$(PROG) "http://"
+	# ./build/$(PROG)
 
 ## directory structure 
 # root
@@ -48,3 +49,5 @@ test:
 #  -build
 #   $(TARGET)
 #  Makefile
+
+# vim:noexpandtab ts=4 sw=4:

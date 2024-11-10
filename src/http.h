@@ -1,5 +1,5 @@
-#ifndef _HTTPC_HTTP_H_
-#define _HTTPC_HTTP_H_
+#ifndef _WD_HTTP_H
+#define _WD_HTTP_H
 
 #include <netinet/in.h>
 #include <stdint.h>
@@ -133,13 +133,13 @@ typedef struct {
 
 wd_http_hdr_t *create_http_hdr(wd_uri_t *uri, wd_http_method_t method);
 wd_http_hdr_t *create_http_hdr_get(wd_uri_t *uri);
-// u_char *create_http_req(wd_http_hdr_t *hdr, u_char *data);
 u_char *create_http_req(u_char *http_req, wd_http_hdr_t *hdr, u_char *data);
 // int parse_req_params(char *req_param_str);
 
 // convert method flg to method name
-char *method_to_name(wd_http_method_t method);
-char *version_to_name(wd_http_version_t method);
+char *method_itoa(wd_http_method_t method);
+wd_http_method_t method_atoi(char *method_name);
+char *version_itoa(wd_http_version_t method);
 int http_connect(struct in_addr, in_port_t port);
-#endif //_HTTPC_HTTP_H_
+#endif //_WD_HTTP_H
 // vim:ft=c :

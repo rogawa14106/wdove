@@ -10,7 +10,7 @@
 #include <http.h>
 #include <uri.h>
 
-char *method_to_name(wd_http_method_t method) {
+char *method_itoa(wd_http_method_t method) {
   char *method_name;
   u_int8_t is_valid = 0;
   for (int i = 0; i < sizeof(wd_http_method_name_t); i++) {
@@ -24,12 +24,30 @@ char *method_to_name(wd_http_method_t method) {
   if (is_valid == 1) {
     return method_name;
   } else {
-    printf("error::method_to_name: Unknown http method.");
+    printf("error::method_to_name: Unknown http method.\n");
+    exit(EXIT_FAILURE);
+  }
+}
+wd_http_method_t method_atoi(char *method_name) {
+  wd_http_method_t method;
+  u_int8_t is_valid = 0;
+  for (int i = 0; i < sizeof(wd_http_method_name_t); i++) {
+    if (strcmp(method_names[i].name, method_name) == 0) {
+      method = ~method_names[i].method;
+      is_valid = 1;
+      break;
+    }
+  }
+
+  if (is_valid == 1) {
+    return method;
+  } else {
+    printf("error::method_to_name: Unknown http method.\n");
     exit(EXIT_FAILURE);
   }
 }
 
-char *version_to_name(wd_http_version_t method) {
+char *version_itoa(wd_http_version_t method) {
   char *version_name;
   u_int8_t is_valid = 0;
   for (int i = 0; i < sizeof(wd_http_version_name_t); i++) {
@@ -43,7 +61,7 @@ char *version_to_name(wd_http_version_t method) {
   if (is_valid == 1) {
     return version_name;
   } else {
-    printf("error::version_to_name: Unknown http version.");
+    printf("error::version_itoa: Unknown http version.");
     exit(EXIT_FAILURE);
   }
 }
@@ -73,10 +91,10 @@ wd_http_hdr_t *create_http_hdr(wd_uri_t *uri, wd_http_method_t method) {
 wd_http_hdr_t *create_http_hdr_get(wd_uri_t *uri) {
   wd_http_hdr_t *http_hdr;
   http_hdr = malloc(sizeof(wd_http_hdr_t));
-  http_hdr->method = method_to_name(HTTP_GET);
+  http_hdr->method = method_itoa(HTTP_GET);
   http_hdr->uri.path = uri->path;
   http_hdr->uri.query = uri->query;
-  http_hdr->version = version_to_name(HTTP_VERSION_1_1);
+  http_hdr->version = version_itoa(HTTP_VERSION_1_1);
 
   // TODO
   // これはデフォルトの設定とするとして、コマンドライン引数からヘッダをシテイできるようにもしたい
@@ -106,7 +124,7 @@ u_char *create_http_req(u_char *http_req, wd_http_hdr_t *hdr, u_char *data) {
     sprintf((char *)field, "%s: %s\r\n", (char *)hdr->fields[i].name,
             (char *)hdr->fields[i].val);
     strcat((char *)http_req, (char *)field);
-    printf("i:%d, %s", i, field);
+    // printf("i:%d, %s", i, field);
   };
 
   strcat((char *)http_req, "\r\n");

@@ -1,5 +1,6 @@
 # packet capture for http communication reference
-http.pcapng
+*.pcapng
+
 # personal TODO list
 TODO.md
 

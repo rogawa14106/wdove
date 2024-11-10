@@ -25,15 +25,17 @@ run:
 
 test:
 	# 正常系
-	./build/$(PROG) "http://abehiroshi.la.coocan.jp/top.htm"
-	./build/$(PROG) "http://abehiroshi.la.coocan.jp:80/top.htm?id=10&name=rogawa"
-	./build/$(PROG) "http://abehiroshi.la.coocan.jp:80?id=10&name=rogawa"
-	./build/$(PROG) "http://abehiroshi.la.coocan.jp:80/top.htm"
-	./build/$(PROG) "http://abehiroshi.la.coocan.jp/top.htm"
-	./build/$(PROG) "http://abehiroshi.la.coocan.jp:80"
-	./build/$(PROG) "http://abehiroshi.la.coocan.jp"
-	./build/$(PROG) "http://abehiroshi.la.coocan.jp/top.htm?id=10&name=rogawa"
-	./build/$(PROG) "http://abehiroshi.la.coocan.jp?id=10&name=rogawa"
+	# ./build/$(PROG) "http://abehiroshi.la.coocan.jp/top.htm"
+	# ./build/$(PROG) -X GET "http://abehiroshi.la.coocan.jp/top.htm"
+	./build/$(PROG) "http://abehiroshi.la.coocan.jp/top.htm" -X GET 
+	# ./build/$(PROG) "http://abehiroshi.la.coocan.jp:80/top.htm?id=10&name=rogawa"
+	# ./build/$(PROG) "http://abehiroshi.la.coocan.jp:80?id=10&name=rogawa"
+	# ./build/$(PROG) "http://abehiroshi.la.coocan.jp:80/top.htm"
+	# ./build/$(PROG) "http://abehiroshi.la.coocan.jp/top.htm"
+	# ./build/$(PROG) "http://abehiroshi.la.coocan.jp:80"
+	# ./build/$(PROG) "http://abehiroshi.la.coocan.jp"
+	# ./build/$(PROG) "http://abehiroshi.la.coocan.jp/top.htm?id=10&name=rogawa"
+	# ./build/$(PROG) "http://abehiroshi.la.coocan.jp?id=10&name=rogawa"
 	# 異常系
 	# ./build/$(PROG) "abehiroshi.la.coocan.jp"
 	# ./build/$(PROG) "http://"

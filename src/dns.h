@@ -1,10 +1,10 @@
-#ifndef _DNS_H
-#define _DNS_H
+#ifndef _WD_DNS_H
+#define _WD_DNS_H
 
 #include <netinet/in.h>
 
 struct in_addr resolve_host(char *hostname);
 
-#endif // _DNS_H
+#endif // _WD_DNS_H
 
 // vim:ft=c :

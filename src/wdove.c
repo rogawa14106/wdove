@@ -49,11 +49,16 @@ int main(int argc, char **argv) {
 
   // create http header
   wd_http_hdr_t *http_req_hdr = create_http_hdr(uri, wd_args->method);
+  free(wd_args);
+  wd_args = NULL;
 
   // create http reqest
   u_char http_req_data[] = "{\"name\": \"rogawa\"}"; // TODO send json data
   u_char http_req[1024];
   create_http_req(http_req, http_req_hdr, http_req_data);
+  free(http_req_hdr);
+  http_req_hdr = NULL;
+
   printf("info::wdove: === REQUEST ==============================\n");
   printf("host address: %s\n", inet_ntoa(hostaddr));
   printf("tcp portnum : %d\n", atoi(uri->port));
@@ -65,6 +70,8 @@ int main(int argc, char **argv) {
     printf("error::wdove: Connection does not established. exit.\n");
     exit(EXIT_FAILURE);
   }
+  free(uri);
+  uri = NULL;
 
   // send http request
   // send(int fd, const void *buf, size_t n, int flags)
@@ -82,6 +89,7 @@ int main(int argc, char **argv) {
   int byte_recv_tot = 0;
   int byte_recv = 0;
 
+  printf("info::wdove: === RESPONSE =============================\n\n");
   // while (byte_recv_tot < sizeof(read_buf) - 1) {
   while (byte_recv_tot < max_rcv_len) {
     // 0 clear
@@ -91,17 +99,19 @@ int main(int argc, char **argv) {
     byte_recv = recv(sock, read_buf, sizeof(read_buf) - 1, 0);
 
     if (byte_recv <= 0) {
-      printf(" All responses have been received. Or, failed to receive "
+      printf("info::wdove: All responses have been received. Or, failed to "
+             "receive "
              "response.\n");
       exit(EXIT_FAILURE);
     };
 
-    printf("info::wdove: === RESPONSE size:%d, total: %d "
-           "=============================\n%s\n",
-           byte_recv, byte_recv_tot, read_buf);
+    // print response data
+    // printf("info::wdove: === RESPONSE size:%d, total: %d "
+    // "=============================\n%s\n", byte_recv, byte_recv_tot,
+    // read_buf);
+    printf("%s", read_buf);
 
     byte_recv_tot += byte_recv;
-
     if (byte_recv < sizeof(read_buf) - 1) {
       printf(" All responses have been received.\n");
       break;
